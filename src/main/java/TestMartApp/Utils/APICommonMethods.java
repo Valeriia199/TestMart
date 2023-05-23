@@ -12,9 +12,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class APICommonMethods {
-     public static String getRequest(String utlToRead) throws Exception{
+     public static String getRequest(String urlToRead) throws Exception{
          StringBuilder result= new StringBuilder();
-         URL url=new URL(utlToRead);
+         URL url=new URL(urlToRead);
          HttpURLConnection conn = (HttpURLConnection) url.openConnection();
          conn.setRequestMethod("GET");
          try (BufferedReader reader = new BufferedReader(
