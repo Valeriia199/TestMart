@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class APICommonMethods {
@@ -35,5 +36,15 @@ public class APICommonMethods {
             }
         }
         return listOfObjects;
+    }
+    public static JSONObject getObjectById(String objectURL, String token, Integer objectId) throws Exception {
+        List<JSONObject> listOfObjects = new LinkedList<>(getAllObjects(objectURL, token));
+        for (JSONObject jobject: listOfObjects
+        ) {
+            if(jobject.get("id")==objectId){
+                return jobject;
+            }
+        }
+        return null;
     }
 }
