@@ -1,5 +1,6 @@
 package TestMartApp.Utils;
 
+import org.apache.http.client.utils.URIBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -46,5 +47,11 @@ public class APICommonMethods {
             }
         }
         return null;
+    }
+    public static List searchByQuery(String url, String token, String query) throws Exception {
+        URIBuilder uriBuilder = new URIBuilder(url+"/search");
+        uriBuilder.addParameter("q", query);
+        URL paramURL = uriBuilder.build().toURL();
+        return APICommonMethods.getAllObjects(paramURL.toString(), token);
     }
 }
