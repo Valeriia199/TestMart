@@ -30,4 +30,13 @@ public class TestCommonMethods {
         }
         return responseJsonList;
     }
+    public static boolean areListsMatch(List <JSONObject> listFromApp, List <JSONObject> listFromTest, String compareBy){
+        boolean isMatch = false;
+        if(listFromApp.size()==listFromTest.size()){
+            for(int i = 0; i< listFromApp.size(); i++){
+                isMatch = (listFromTest.get(i).get(compareBy)).equals(listFromApp.get(i).get(compareBy));
+            }
+        }
+        return isMatch;
+    }
 }
