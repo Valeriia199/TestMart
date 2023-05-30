@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ProductServiceTest {
@@ -38,6 +39,26 @@ public class ProductServiceTest {
         List<JSONObject> productsApp = productClass.searchProducts("phone");
         List<JSONObject> productsTest = TestCommonMethods.getAllTestObjects(TestConstants.PRODUCTS_SEARCH_PHONE, "products");
         Assertions.assertTrue(TestCommonMethods.areListsMatch(productsApp,productsTest,"brand", "title"),
+                "getProductByQuery method works as expected");
+    }
+    @Test
+    public void getCategories() throws Exception {
+        List <String> productsApp = productClass.getCategories();
+        List <String> productsTest = Arrays.asList(TestCommonMethods.responseString(TestConstants.PRODUCTS_CATEGORIES).split(","));
+        boolean isMatch = false;
+        if(productsApp.size()==productsTest.size()){
+            for(int i = 0; i< productsApp.size(); i++){
+                isMatch = (productsTest.get(i)).equals(productsApp.get(i));
+            }
+        }
+        Assertions.assertTrue(isMatch,"getCategories method works as expected");
+    }
+
+    @Test
+    public void getProductsByCategory() throws Exception {
+        List<JSONObject> productsApp = productClass.getProductsByCategory("smartphones");
+        List<JSONObject> productsTest = TestCommonMethods.getAllTestObjects(TestConstants.PRODUCTS_SMARTPHONES, "products");
+        Assertions.assertTrue(TestCommonMethods.areListsMatch(productsApp, productsTest,"category", "title"),
                 "getProductByQuery method works as expected");
     }
 }
