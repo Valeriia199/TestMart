@@ -12,11 +12,12 @@ import java.util.List;
 
 public class ProductClass implements ProductService {
     URIBuilder uriBuilder;
-    public List<JSONObject> getAllProducts() throws Exception    {
-        return APICommonMethods.getAllObjects(APIConstants.PRODUCTS,"products");
+
+    public List<JSONObject> getAllProducts() throws Exception {
+        return APICommonMethods.getAllObjects(APIConstants.PRODUCTS, "products");
     }
 
-    public List getAllProducts(int limit, int skip, String fields) throws Exception {
+    public List<JSONObject> getAllProducts(int limit, int skip, String fields) throws Exception {
         uriBuilder = new URIBuilder(APIConstants.PRODUCTS);
         uriBuilder.addParameter("limit", String.valueOf(limit));
         uriBuilder.addParameter("skip", String.valueOf(skip));
@@ -29,21 +30,19 @@ public class ProductClass implements ProductService {
         return APICommonMethods.getObjectById(APIConstants.PRODUCTS, "products", productId);
     }
 
-
-    public List searchProducts(String query) throws Exception {
-        return APICommonMethods.searchByQuery(APIConstants.PRODUCTS,"products",query);
+    public List<JSONObject> searchProducts(String query) throws Exception {
+        return APICommonMethods.searchByQuery(APIConstants.PRODUCTS, "products", query);
     }
 
     public List<String> getCategories() throws Exception {
         uriBuilder = new URIBuilder(APIConstants.PRODUCTS + "/categories");
         URL paramURL = uriBuilder.build().toURL();
         String responseString = APICommonMethods.getRequest(paramURL.toString());
-        List<String> allProducts = new ArrayList<>(Arrays.asList(responseString.split( ",")));
-        return allProducts;
+        return new ArrayList<>(Arrays.asList(responseString.split(",")));
     }
 
-    public List getProductsByCategory(String categoryName) throws Exception {
-        uriBuilder = new URIBuilder(APIConstants.PRODUCTS+"/category/"+categoryName);
+    public List<JSONObject> getProductsByCategory(String categoryName) throws Exception {
+        uriBuilder = new URIBuilder(APIConstants.PRODUCTS + "/category/" + categoryName);
         URL paramURL = uriBuilder.build().toURL();
         return APICommonMethods.getAllObjects(paramURL.toString(), "products");
     }
