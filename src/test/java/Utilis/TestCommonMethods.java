@@ -11,7 +11,7 @@ import java.util.List;
 public class TestCommonMethods {
     public static RequestSpecification request;
 
-    public static String responseString (String url){
+    public static String responseString(String url) {
         return RestAssured.given().get(url).getBody().asString();
     }
 
@@ -30,11 +30,24 @@ public class TestCommonMethods {
         }
         return responseJsonList;
     }
-    public static boolean areListsMatch(List <JSONObject> listFromApp, List <JSONObject> listFromTest, String compareBy){
+
+    public static boolean areListsMatch(List<JSONObject> listFromApp, List<JSONObject> listFromTest, String compareBy) {
         boolean isMatch = false;
-        if(listFromApp.size()==listFromTest.size()){
-            for(int i = 0; i< listFromApp.size(); i++){
+        if (listFromApp.size() == listFromTest.size()) {
+            for (int i = 0; i < listFromApp.size(); i++) {
                 isMatch = (listFromTest.get(i).get(compareBy)).equals(listFromApp.get(i).get(compareBy));
+            }
+        }
+        return isMatch;
+    }
+
+    public static boolean areListsMatch(List<JSONObject> listFromApp, List<JSONObject> listFromTest,
+                                        String compareBy1, String compareBy2) {
+        boolean isMatch = false;
+        if (listFromApp.size() == listFromTest.size()) {
+            for (int i = 0; i < listFromApp.size(); i++) {
+                isMatch = (listFromTest.get(i).get(compareBy1)).equals(listFromApp.get(i).get(compareBy1)) &&
+                        (listFromTest.get(i).get(compareBy2)).equals(listFromApp.get(i).get(compareBy2));
             }
         }
         return isMatch;
