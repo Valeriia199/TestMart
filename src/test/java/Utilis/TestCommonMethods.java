@@ -52,4 +52,12 @@ public class TestCommonMethods {
         }
         return isMatch;
     }
+    public static boolean areJSONObjectsMatch (JSONObject jObject1, JSONObject jObject2, String compareBy1, String compareBy2){
+        boolean isMatch = false;
+        if(jObject1.length()==jObject2.length()) {
+            isMatch = (jObject1.get(compareBy1)).equals(jObject2.get(compareBy1)) &&
+                    (jObject1.get(compareBy2)).equals(jObject2.get(compareBy2));
+        }
+        return isMatch;
+    }
 }
