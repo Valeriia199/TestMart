@@ -19,4 +19,11 @@ public class CartServiceTest {
         Assertions.assertTrue(TestCommonMethods.areListsMatch(cartsListApp, cartsListTest, "id"),
                 "getAllCarts method works as expected");
     }
+    @Test
+    public void getCartByIdTest() throws Exception {
+        JSONObject cartsApp = cartClass.getCart(1);
+        JSONObject cartsTest = TestCommonMethods.getJSONObject(TestConstants.CARTS_1);
+        Assertions.assertTrue(TestCommonMethods.areJSONObjectsMatch(cartsApp, cartsTest, "id", "userId"),
+                "getCartById method works as expected");
+    }
 }
