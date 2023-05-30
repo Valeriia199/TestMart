@@ -26,4 +26,11 @@ public class UserServiceTest {
         Assertions.assertTrue(TestCommonMethods.areJSONObjectsMatch(usersApp, usersTest, "id", "birthDate"),
                 "getUserById method works as expected");
     }
+    @Test
+    public void searchUsersByQueryTest() throws Exception {
+        List<JSONObject> usersApp = userClass.searchUsers("John");
+        List<JSONObject> usersTest = TestCommonMethods.getAllTestObjects(TestConstants.USERS_SEARCH_JOHN, "users");
+        Assertions.assertTrue(TestCommonMethods.areListsMatch(usersApp, usersTest, "id", "birthDate"),
+                "searchUsersByQuery method works as expected");
+    }
 }

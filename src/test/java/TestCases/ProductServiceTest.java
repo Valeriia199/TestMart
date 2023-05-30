@@ -33,4 +33,11 @@ public class ProductServiceTest {
         Assertions.assertTrue(TestCommonMethods.areJSONObjectsMatch(productsApp,productsTest,"id", "title"),
                 "getProductById method works as expected");
     }
+    @Test
+    public void getProductByQueryTest() throws Exception {
+        List<JSONObject> productsApp = productClass.searchProducts("phone");
+        List<JSONObject> productsTest = TestCommonMethods.getAllTestObjects(TestConstants.PRODUCTS_SEARCH_PHONE, "products");
+        Assertions.assertTrue(TestCommonMethods.areListsMatch(productsApp,productsTest,"brand", "title"),
+                "getProductByQuery method works as expected");
+    }
 }

@@ -26,4 +26,11 @@ public class CartServiceTest {
         Assertions.assertTrue(TestCommonMethods.areJSONObjectsMatch(cartsApp, cartsTest, "id", "userId"),
                 "getCartById method works as expected");
     }
+    @Test
+    public void getUserCartsTest() throws Exception {
+        List<JSONObject> cartsApp = cartClass.getUserCarts(5);
+        List<JSONObject> cartsTest = TestCommonMethods.getAllTestObjects(TestConstants.CARTS_USER_5,"carts");
+        Assertions.assertTrue(TestCommonMethods.areListsMatch(cartsApp, cartsTest, "id", "userId"),
+                "getUserCarts method works as expected");
+    }
 }
